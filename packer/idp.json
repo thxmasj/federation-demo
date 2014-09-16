@@ -1,0 +1,29 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
+    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-east-1",
+      "source_ami": "ami-76817c1e",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "ami_name": "WS-Federation Test - IDP ({{.CreateTime}})"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum -y update",
+        "sudo yum -y install tomcat7",
+        "sudo chkconfig --add tomcat7",
+        "sudo chkconfig tomcat7 on"
+      ]
+    }
+  ]
+}
