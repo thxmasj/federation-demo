@@ -17,12 +17,18 @@
   ],
   "provisioners": [
     {
+      "type": "file",
+      "source": "target/keys/idp-ssl.jks",
+      "destination": "/tmp/"
+    },
+    {
       "type": "shell",
       "inline": [
         "sudo yum -y update",
         "sudo yum -y install tomcat7",
         "sudo chkconfig --add tomcat7",
-        "sudo chkconfig tomcat7 on"
+        "sudo chkconfig tomcat7 on",
+        "sudo mv /tmp/idp-ssl.jks /usr/share/tomcat7/"
       ]
     }
   ]
