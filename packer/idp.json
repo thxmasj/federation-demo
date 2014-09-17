@@ -1,28 +1,46 @@
 {
-  "variables": {
-    "aws_access_key": "{{env `AWS_ACCESS_KEY`}}",
-    "aws_secret_key": "{{env `AWS_SECRET_KEY`}}"
-  },
   "builders": [
     {
       "type": "amazon-ebs",
-      "access_key": "{{user `aws_access_key`}}",
-      "secret_key": "{{user `aws_secret_key`}}",
       "region": "us-east-1",
       "source_ami": "ami-76817c1e",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "ami_name": "WS-Federation Test - IDP ({{.CreateTime}})"
+      "ami_name": "federation-demo/IDP ({{timestamp}})"
     }
   ],
   "provisioners": [
+    {
+      "type": "file",
+      "source": "target/cxf-fediz/services/idp/target/fediz-idp.war",
+      "destination": "/tmp/fediz-idp.war"
+    },
+    {
+      "type": "file",
+      "source": "target/cxf-fediz/services/sts/target/fediz-idp-sts.war",
+      "destination": "/tmp/fediz-idp-sts.war"
+    },
+    {
+      "type": "file",
+      "source": "target/keys/idp-ssl.jks",
+      "destination": "/tmp/keystore.jks"
+    },
+    {
+      "type": "file",
+      "source": "tomcat/server.xml",
+      "destination": "/tmp/server.xml"
+    },
     {
       "type": "shell",
       "inline": [
         "sudo yum -y update",
         "sudo yum -y install tomcat7",
         "sudo chkconfig --add tomcat7",
-        "sudo chkconfig tomcat7 on"
+        "sudo chkconfig tomcat7 on",
+        "sudo cp /tmp/fediz-idp.war /usr/share/tomcat7/webapps",
+        "sudo cp /tmp/fediz-idp-sts.war /usr/share/tomcat7/webapps",
+        "sudo cp /tmp/keystore.jks /usr/share/tomcat7",
+        "sudo cp /tmp/server.xml /etc/tomcat7/server.xml"
       ]
     }
   ]
