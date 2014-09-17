@@ -2,7 +2,7 @@
 
 mkdir -p target/keys
 cd target/keys
-rm *
+rm -f *
 
 # SSL: IdP
 keytool -genkeypair -validity 730 -alias idp-ssl -keystore idp-ssl.jks -dname "cn=localhost" -storepass changeit -keypass changeit

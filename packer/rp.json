@@ -6,29 +6,24 @@
       "source_ami": "ami-76817c1e",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "ami_name": "federation-demo/IDP ({{timestamp}})"
+      "ami_name": "federation-demo/RP ({{timestamp}})"
     }
   ],
   "provisioners": [
     {
       "type": "file",
-      "source": "target/cxf-fediz/services/idp/target/fediz-idp.war",
-      "destination": "/tmp/fediz-idp.war"
+      "source": "target/cxf-fediz/plugins/tomcat/target/fediz-tomcat-\\*-zip-with-dependencies.zip",
+      "destination": "/tmp/"
     },
     {
       "type": "file",
-      "source": "target/cxf-fediz/services/sts/target/fediz-idp-sts.war",
-      "destination": "/tmp/fediz-idp-sts.war"
-    },
-    {
-      "type": "file",
-      "source": "target/keys/idp-ssl.jks",
+      "source": "target/keys/rp-ssl.jks",
       "destination": "/tmp/keystore.jks"
     },
     {
       "type": "file",
       "source": "tomcat/server.xml",
-      "destination": "/tmp/server.xml"
+      "destination": "/tmp/"
     },
     {
       "type": "shell",
@@ -37,8 +32,9 @@
         "sudo yum -y install tomcat7",
         "sudo chkconfig --add tomcat7",
         "sudo chkconfig tomcat7 on",
-        "sudo cp /tmp/fediz-idp.war /usr/share/tomcat7/webapps",
-        "sudo cp /tmp/fediz-idp-sts.war /usr/share/tomcat7/webapps",
+        "sudo mkdir /usr/share/tomcat7/lib/fediz",
+        "sudo sed -i 's/\\(^common.loader=.*\\)/\\1,\\$\\{catalina.home\\}\\/lib\\/fediz\\/\\*\\.jar/' /usr/share/tomcat7/conf/catalina.properties",
+        "sudo unzip /tmp/fediz-tomcat-\\*-zip-with-dependencies.zip -d /usr/share/tomcat7/lib/fediz/",
         "sudo cp /tmp/keystore.jks /usr/share/tomcat7",
         "sudo cp /tmp/server.xml /etc/tomcat7/server.xml"
       ]
