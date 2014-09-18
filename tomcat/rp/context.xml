@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <Valve className="org.apache.cxf.fediz.tomcat.FederationAuthenticator"
+           configFile="conf/Fediz_config.xml"/>
+
+</Context>
+

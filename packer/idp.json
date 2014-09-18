@@ -22,25 +22,25 @@
     },
     {
       "type": "file",
-      "source": "target/keys/idp-ssl.jks",
+      "source": "target/keys/ssl/idp-ssl.jks",
       "destination": "/tmp/keystore.jks"
     },
     {
       "type": "file",
-      "source": "tomcat/server.xml",
+      "source": "tomcat/idp/server.xml",
       "destination": "/tmp/server.xml"
     },
     {
       "type": "shell",
       "inline": [
         "sudo yum -y update",
-        "sudo yum -y install tomcat7",
+        "sudo yum -y install tomcat7 tomcat-native",
         "sudo chkconfig --add tomcat7",
         "sudo chkconfig tomcat7 on",
-        "sudo cp /tmp/fediz-idp.war /usr/share/tomcat7/webapps",
-        "sudo cp /tmp/fediz-idp-sts.war /usr/share/tomcat7/webapps",
-        "sudo cp /tmp/keystore.jks /usr/share/tomcat7",
-        "sudo cp /tmp/server.xml /etc/tomcat7/server.xml"
+        "sudo mv /tmp/fediz-idp.war /usr/share/tomcat7/webapps/",
+        "sudo mv /tmp/fediz-idp-sts.war /usr/share/tomcat7/webapps/",
+        "sudo mv /tmp/keystore.jks /usr/share/tomcat7/",
+        "sudo mv /tmp/server.xml /etc/tomcat7/"
       ]
     }
   ]

@@ -12,31 +12,55 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "target/cxf-fediz/plugins/tomcat/target/fediz-tomcat-\\*-zip-with-dependencies.zip",
-      "destination": "/tmp/"
+      "source": "target/cxf-fediz/plugins/tomcat/target/fediz-tomcat-1.1.1-zip-with-dependencies.zip",
+      "destination": "/tmp/fediz.zip"
     },
     {
       "type": "file",
-      "source": "target/keys/rp-ssl.jks",
+      "source": "target/keys/ssl/rp-ssl.jks",
       "destination": "/tmp/keystore.jks"
     },
     {
       "type": "file",
-      "source": "tomcat/server.xml",
-      "destination": "/tmp/"
+      "source": "target/keys/sts/trust-sts.jks",
+      "destination": "/tmp/trust-sts.jks"
+    },
+    {
+      "type": "file",
+      "source": "tomcat/rp/server.xml",
+      "destination": "/tmp/server.xml"
+    },
+    {
+      "type": "file",
+      "source": "tomcat/rp/context.xml",
+      "destination": "/tmp/context.xml"
+    },
+    {
+      "type": "file",
+      "source": "fediz/Fediz_config.xml",
+      "destination": "/tmp/Fediz_config.xml"
+    },
+    {
+      "type": "file",
+      "source": "target/cxf-fediz/examples/simpleWebapp/target/fedizhelloworld.war",
+      "destination": "/tmp/federation-demo.war"
     },
     {
       "type": "shell",
       "inline": [
         "sudo yum -y update",
-        "sudo yum -y install tomcat7",
+        "sudo yum -y install tomcat7 tomcat-native",
         "sudo chkconfig --add tomcat7",
         "sudo chkconfig tomcat7 on",
         "sudo mkdir /usr/share/tomcat7/lib/fediz",
         "sudo sed -i 's/\\(^common.loader=.*\\)/\\1,\\$\\{catalina.home\\}\\/lib\\/fediz\\/\\*\\.jar/' /usr/share/tomcat7/conf/catalina.properties",
-        "sudo unzip /tmp/fediz-tomcat-\\*-zip-with-dependencies.zip -d /usr/share/tomcat7/lib/fediz/",
-        "sudo cp /tmp/keystore.jks /usr/share/tomcat7",
-        "sudo cp /tmp/server.xml /etc/tomcat7/server.xml"
+        "sudo unzip /tmp/fediz.zip -d /usr/share/tomcat7/lib/fediz/",
+        "sudo mv /tmp/keystore.jks /usr/share/tomcat7/",
+        "sudo mv /tmp/trust-sts.jks /etc/tomcat7/",
+	"sudo mv /tmp/context.xml /etc/tomcat7",
+        "sudo mv /tmp/server.xml /etc/tomcat7/",
+        "sudo mv /tmp/Fediz_config.xml /etc/tomcat7/",
+        "sudo mv /tmp/federation-demo.war /usr/share/tomcat7/webapps/"
       ]
     }
   ]

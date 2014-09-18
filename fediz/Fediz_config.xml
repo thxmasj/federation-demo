@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<FedizConfig>
+    <contextConfig name="/federation-demo">
+        <audienceUris>
+            <audienceItem>https://localhost:8443/federation-demo</audienceItem>
+        </audienceUris>
+        <certificateStores>
+            <trustManager>
+                <keyStore file="conf/trust-sts.jks" password="changeit" type="JKS" />
+            </trustManager>
+        </certificateStores>
+        <trustedIssuers>
+            <issuer certificateValidation="PeerTrust" />
+        </trustedIssuers>
+        <protocol xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="federationProtocolType" version="1.2">
+            <issuer>https://idphost:8443/fediz-idp/</issuer>
+        </protocol>
+    </contextConfig>
+</FedizConfig>
+

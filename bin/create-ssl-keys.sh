@@ -1,7 +1,7 @@
 #!/bin/sh
 
-mkdir -p target/keys
-cd target/keys
+mkdir -p target/keys/ssl
+cd target/keys/ssl
 rm -f *
 
 # SSL: IdP
