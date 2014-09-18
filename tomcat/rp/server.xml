@@ -136,10 +136,6 @@
                prefix="localhost_access_log." suffix=".txt"
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
-        <!-- Fediz plug-in federation authenticator -->
-        <Valve className="org.apache.cxf.fediz.tomcat.FederationAuthenticator"
-               configFile="conf/Fediz_config.xml"/>
-
       </Host>
     </Engine>
   </Service>
