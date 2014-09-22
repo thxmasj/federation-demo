@@ -51,7 +51,7 @@
     {
       "type": "shell",
       "inline": [
-        "sudo yum -y update",
+        "#sudo yum -y update",
         "sudo yum -y install tomcat7 tomcat-native",
         "sudo chkconfig --add tomcat7",
         "sudo chkconfig tomcat7 on",

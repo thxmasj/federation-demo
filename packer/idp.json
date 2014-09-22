@@ -34,16 +34,22 @@
       "destination": "/tmp/server.xml"
     },
     {
+      "type": "file",
+      "source": "target/keys/sts/trust-sts.jks",
+      "destination": "/tmp/trust-sts.jks"
+    },
+    {
       "type": "shell",
       "inline": [
-        "sudo yum -y update",
+        "#sudo yum -y update",
         "sudo yum -y install tomcat7 tomcat-native",
         "sudo chkconfig --add tomcat7",
         "sudo chkconfig tomcat7 on",
         "sudo mv /tmp/fediz-idp.war /usr/share/tomcat7/webapps/",
         "sudo mv /tmp/fediz-idp-sts.war /usr/share/tomcat7/webapps/",
         "sudo mv /tmp/keystore.jks /usr/share/tomcat7/",
-        "sudo mv /tmp/server.xml /etc/tomcat7/"
+        "sudo mv /tmp/server.xml /etc/tomcat7/",
+        "sudo mv /tmp/trust-sts.jks /usr/share/tomcat7/"
       ]
     }
   ]
