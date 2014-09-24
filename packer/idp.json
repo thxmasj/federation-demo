@@ -6,7 +6,7 @@
       "source_ami": "ami-76817c1e",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "ami_name": "federation-demo/IDP ({{timestamp}})",
+      "ami_name": "federation-demo/IDP ({{isotime | clean_ami_name}})",
       "tags": {
         "Name": "federation-demo/IDP"
       }
@@ -39,6 +39,11 @@
       "destination": "/tmp/trust-sts.jks"
     },
     {
+      "type": "file",
+      "source": "target/keys/sts/realma-sts.jks",
+      "destination": "/tmp/realma-sts.jks"
+    },
+    {
       "type": "shell",
       "inline": [
         "#sudo yum -y update",
@@ -49,7 +54,9 @@
         "sudo mv /tmp/fediz-idp-sts.war /usr/share/tomcat7/webapps/",
         "sudo mv /tmp/keystore.jks /usr/share/tomcat7/",
         "sudo mv /tmp/server.xml /etc/tomcat7/",
-        "sudo mv /tmp/trust-sts.jks /usr/share/tomcat7/"
+        "sudo mv /tmp/trust-sts.jks /usr/share/tomcat7/",
+        "sudo mv /tmp/realma-sts.jks /usr/share/tomcat7/",
+        "sudo su -c 'echo \"CATALINA_OPTS='-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n'\" >> /etc/tomcat7/tomcat7.conf'"
       ]
     }
   ]

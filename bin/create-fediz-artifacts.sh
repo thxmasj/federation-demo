@@ -12,9 +12,18 @@ sed -i .old 's/WS Federation Tomcat Examples/Federation APP_SERCURE_TEST/' examp
 sed -i .old 's/WS Federation Tomcat Examples/Federation IDP_INDEX/' services/idp/src/main/webapp/index.html
 sed -i .old 's/ispass/changeit/' services/idp/src/main/webapp/WEB-INF/applicationContext.xml
 
+# Configure Crypto for IDP
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.file=stsrealm_a.jks/org.apache.ws.security.crypto.merlin.keystore.file=realma-sts.jks/' services/idp/src/main/resources/stsKeystoreA.properties
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.alias=realma/org.apache.ws.security.crypto.merlin.keystore.alias=realma-sts/' services/idp/src/main/resources/stsKeystoreA.properties
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.password=storepass/org.apache.ws.security.crypto.merlin.keystore.password=changeit/' services/idp/src/main/resources/stsKeystoreA.properties
+
+# Configure Crypto for STS signing
+sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.file=stsrealm_a.jks/org.apache.ws.security.crypto.merlin.keystore.file=realma-sts.jks/' services/sts/src/main/resources/stsKeystoreA.properties
+sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.alias=realma/org.apache.ws.security.crypto.merlin.keystore.alias=realma-sts/' services/sts/src/main/resources/stsKeystoreA.properties
+sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.password=storepass/org.apache.ws.security.crypto.merlin.keystore.password=changeit/' services/sts/src/main/resources/stsKeystoreA.properties
+echo 'org.apache.ws.security.crypto.merlin.keystore.private.password=changeit' >> services/sts/src/main/resources/stsKeystoreA.properties
+
+# Configure Crypto for STS trust verification
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.file=ststrust.jks/org.apache.ws.security.crypto.merlin.keystore.file=trust-sts.jks/' services/sts/src/main/resources/stsTruststore.properties
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.password=storepass/org.apache.ws.security.crypto.merlin.keystore.password=changeit/' services/sts/src/main/resources/stsTruststore.properties
 

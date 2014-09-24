@@ -6,7 +6,7 @@
       "source_ami": "ami-76817c1e",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "ami_name": "federation-demo/RP ({{timestamp}})",
+      "ami_name": "federation-demo/RP ({{isotime | clean_ami_name}})",
       "tags": {
         "Name": "federation-demo/RP"
       }
@@ -63,7 +63,8 @@
 	"sudo mv /tmp/context.xml /etc/tomcat7",
         "sudo mv /tmp/server.xml /etc/tomcat7/",
         "sudo mv /tmp/Fediz_config.xml /etc/tomcat7/",
-        "sudo mv /tmp/federation-demo.war /usr/share/tomcat7/webapps/"
+        "sudo mv /tmp/federation-demo.war /usr/share/tomcat7/webapps/",
+        "sudo su -c 'echo \"CATALINA_OPTS='-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n'\" >> /etc/tomcat7/tomcat7.conf'"
       ]
     }
   ]
