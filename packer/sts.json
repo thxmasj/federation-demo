@@ -6,17 +6,17 @@
       "source_ami": "ami-76817c1e",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
-      "ami_name": "federation-demo/IDP ({{isotime | clean_ami_name}})",
+      "ami_name": "federation-demo/STS ({{isotime | clean_ami_name}})",
       "tags": {
-        "Name": "federation-demo/IDP"
+        "Name": "federation-demo/STS"
       }
     }
   ],
   "provisioners": [
     {
       "type": "file",
-      "source": "target/cxf-fediz/services/idp/target/fediz-idp.war",
-      "destination": "/tmp/fediz-idp.war"
+      "source": "target/cxf-fediz/services/sts/target/fediz-idp-sts.war",
+      "destination": "/tmp/fediz-idp-sts.war"
     },
     {
       "type": "file",
@@ -45,7 +45,7 @@
         "sudo yum -y install tomcat7 tomcat-native",
         "sudo chkconfig --add tomcat7",
         "sudo chkconfig tomcat7 on",
-        "sudo mv /tmp/fediz-idp.war /usr/share/tomcat7/webapps/",
+        "sudo mv /tmp/fediz-idp-sts.war /usr/share/tomcat7/webapps/",
         "sudo mv /tmp/keystore.jks /usr/share/tomcat7/",
         "sudo mv /tmp/server.xml /etc/tomcat7/",
         "sudo mv /tmp/trust-sts.jks /usr/share/tomcat7/",

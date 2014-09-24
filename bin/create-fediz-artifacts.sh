@@ -17,6 +17,9 @@ sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.file=stsrealm_a.jks
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.alias=realma/org.apache.ws.security.crypto.merlin.keystore.alias=realma-sts/' services/idp/src/main/resources/stsKeystoreA.properties
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.password=storepass/org.apache.ws.security.crypto.merlin.keystore.password=changeit/' services/idp/src/main/resources/stsKeystoreA.properties
 
+# Configure IDP with address to STS
+sed -i .old 's/localhost/stshost/' services/idp/src/main/webapp/WEB-INF/security-config.xml
+
 # Configure Crypto for STS signing
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.file=stsrealm_a.jks/org.apache.ws.security.crypto.merlin.keystore.file=realma-sts.jks/' services/sts/src/main/resources/stsKeystoreA.properties
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.alias=realma/org.apache.ws.security.crypto.merlin.keystore.alias=realma-sts/' services/sts/src/main/resources/stsKeystoreA.properties
