@@ -8,5 +8,5 @@ create-sts-keys.sh &
 wait
 
 create-fediz-artifacts.sh
+mvn package
 create-machine-images.sh
-

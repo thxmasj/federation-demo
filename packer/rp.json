@@ -45,7 +45,7 @@
     },
     {
       "type": "file",
-      "source": "target/cxf-fediz/examples/simpleWebapp/target/fedizhelloworld.war",
+      "source": "hello/target/hello-1.0-SNAPSHOT.war",
       "destination": "/tmp/federation-demo.war"
     },
     {
