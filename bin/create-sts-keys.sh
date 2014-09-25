@@ -5,11 +5,11 @@ cd target/keys/sts
 rm -f *
 
 # STS: Realm A
-keytool -genkeypair -keyalg RSA -validity 3600 -alias realma-sts -keystore realma-sts.jks -dname "CN=REALMA" -storepass changeit -keypass changeit
+keytool -genkeypair -keyalg RSA -validity 3600 -alias realma-sts -keystore realma-sts.jks -dname "CN=DEPARTMENTA" -storepass changeit -keypass changeit
 keytool -export -file realma-sts.cer -alias realma-sts -keystore realma-sts.jks -storepass changeit
 
 # STS: Realm B
-keytool -genkeypair -keyalg RSA -validity 3600 -alias realmb-sts -keystore realmb-sts.jks -dname "CN=REALMB" -storepass changeit -keypass changeit
+keytool -genkeypair -keyalg RSA -validity 3600 -alias realmb-sts -keystore realmb-sts.jks -dname "CN=DEPARTMENTB" -storepass changeit -keypass changeit
 keytool -export -file realmb-sts.cer -alias realmb-sts -keystore realmb-sts.jks -storepass changeit
 
 # STS: Trust

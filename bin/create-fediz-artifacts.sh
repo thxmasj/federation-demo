@@ -32,6 +32,13 @@ sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.password=storepass/
 
 cp ../keys/ssl/idp-ssl-trust.jks services/idp/src/main/resources/idp-ssl-trust.jks
 
+rm services/idp/src/main/resources/stsrealm_a.jks
+rm services/idp/src/main/resources/stsrealm_b.jks
+
+rm services/sts/src/main/resources/stsrealm_a.jks
+rm services/sts/src/main/resources/stsrealm_b.jks
+rm services/sts/src/main/resources/ststrust.jks
+
 rm examples/simpleWebapp/src/main/webapp/META-INF/context.xml
 mvn clean package -DskipTests
 
