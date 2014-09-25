@@ -50,7 +50,9 @@
         "sudo mv /tmp/server.xml /etc/tomcat7/",
         "sudo mv /tmp/trust-sts.jks /usr/share/tomcat7/",
         "sudo mv /tmp/realma-sts.jks /usr/share/tomcat7/",
-        "sudo su -c 'echo \"CATALINA_OPTS='-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n'\" >> /etc/tomcat7/tomcat7.conf'"
+        "sudo su -c 'echo \"CATALINA_OPTS='-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n'\" >> /etc/tomcat7/tomcat7.conf'",
+        "echo \"alias log='sudo less /var/log/tomcat7/catalina.out'\" >> .bash_profile",
+        "echo \"alias accesslog='sudo less /var/log/tomcat7/localhost_access_log.$(date +%Y-%m-%d).txt'\" >> .bash_profile"
       ]
     }
   ]
