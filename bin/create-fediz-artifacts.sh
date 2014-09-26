@@ -6,10 +6,8 @@ git clone https://git-wip-us.apache.org/repos/asf/cxf-fediz.git $DIR
 cd $DIR
 git checkout tags/fediz-1.1.1
 
-sed -i .old 's/^realmA.port=.*/realmA.port=8443/' services/idp/src/main/filters/realm-a/env.properties
+    sed -i .old 's/^realmA.port=.*/realmA.port=8443/' services/idp/src/main/filters/realm-a/env.properties
 sed -i .old 's/^realmB.port=.*/realmB.port=8443/' services/idp/src/main/filters/realm-a/env.properties
-sed -i .old 's/WS Federation Tomcat Examples/Federation APP_INDEX/' examples/simpleWebapp/src/main/webapp/index.html
-sed -i .old 's/WS Federation Tomcat Examples/Federation APP_SERCURE_TEST/' examples/simpleWebapp/src/main/webapp/secure/test.html
 sed -i .old 's/WS Federation Tomcat Examples/Federation IDP_INDEX/' services/idp/src/main/webapp/index.html
 sed -i .old 's/ispass/changeit/' services/idp/src/main/webapp/WEB-INF/applicationContext.xml
 
@@ -43,6 +41,5 @@ rm services/sts/src/main/resources/stsrealm_a.jks
 rm services/sts/src/main/resources/stsrealm_b.jks
 rm services/sts/src/main/resources/ststrust.jks
 
-rm examples/simpleWebapp/src/main/webapp/META-INF/context.xml
 mvn clean package -DskipTests
 
