@@ -6,10 +6,13 @@ git clone https://git-wip-us.apache.org/repos/asf/cxf-fediz.git $DIR
 cd $DIR
 git checkout tags/fediz-1.1.1
 
-    sed -i .old 's/^realmA.port=.*/realmA.port=8443/' services/idp/src/main/filters/realm-a/env.properties
+sed -i .old 's/^realmA.port=.*/realmA.port=8443/' services/idp/src/main/filters/realm-a/env.properties
 sed -i .old 's/^realmB.port=.*/realmB.port=8443/' services/idp/src/main/filters/realm-a/env.properties
 sed -i .old 's/WS Federation Tomcat Examples/Federation IDP_INDEX/' services/idp/src/main/webapp/index.html
-sed -i .old 's/ispass/changeit/' services/idp/src/main/webapp/WEB-INF/applicationContext.xml
+
+# IDP SSL trust store (for SSL communication with STS)
+sed -i .old 's/password="ispass" resource="idp-ssl-trust.jks"/password="changeit" resource="idp-trust-ssl.jks"/' services/idp/src/main/webapp/WEB-INF/applicationContext.xml
+cp ../keys/ssl/idp-trust-ssl.jks services/idp/src/main/resources/
 
 # Configure IDP with address to STS
 sed -i .old 's/localhost/stshost/' services/idp/src/main/webapp/WEB-INF/security-config.xml
@@ -32,11 +35,9 @@ echo 'org.apache.ws.security.crypto.merlin.keystore.private.password=changeit' >
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.file=ststrust.jks/org.apache.ws.security.crypto.merlin.keystore.file=trust-sts.jks/' services/sts/src/main/resources/stsTruststore.properties
 sed -i .old 's/org.apache.ws.security.crypto.merlin.keystore.password=storepass/org.apache.ws.security.crypto.merlin.keystore.password=changeit/' services/sts/src/main/resources/stsTruststore.properties
 
-cp ../keys/ssl/idp-ssl-trust.jks services/idp/src/main/resources/idp-ssl-trust.jks
-
+# Remove original keystores to make sure they are not used (they should now be redundant)
 rm services/idp/src/main/resources/stsrealm_a.jks
 rm services/idp/src/main/resources/stsrealm_b.jks
-
 rm services/sts/src/main/resources/stsrealm_a.jks
 rm services/sts/src/main/resources/stsrealm_b.jks
 rm services/sts/src/main/resources/ststrust.jks

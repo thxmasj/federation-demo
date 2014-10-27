@@ -22,6 +22,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.security.Principal;
 import java.util.Arrays;
+import java.util.Enumeration;
 import java.util.List;
 
 /**
@@ -36,12 +37,11 @@ public class HelloServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         out.println("<html>");
-        out.println("<head><title>WS Federation Example</title></head>");
+        out.println("<head><title>Hello World</title></head>");
         out.println("<body>");
         out.println("<h1>Hello World</h1>");
         out.println("Hello world<br>");
         out.println("Request url: " + request.getRequestURL().toString() + "<p>");
-
 
         out.println("<br><b>User</b><p>");
         Principal p = request.getUserPrincipal();
@@ -86,6 +86,14 @@ public class HelloServlet extends HttpServlet {
         } else {
             out.println("<p>Bootstrap token not cached in thread local storage");
         }
+
+        out.println("HTTP headers:<br>");
+        Enumeration<String> headers = request.getHeaderNames();
+        while (headers.hasMoreElements()) {
+            String header = headers.nextElement();
+            out.println(header + "=" + request.getHeader(header) + "<br>");
+        }
+
 
         out.println("</body>");
     }

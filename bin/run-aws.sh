@@ -4,7 +4,7 @@ if [ ! $# -eq 1 ]; then echo "No AMI id specified"; exit 1; fi
 
 image_id=$1
 
-instance_details=$(aws ec2 run-instances --image-id $image_id --instance-type t2.micro --key-name thomasjohansen.it --security-groups IdP --placement AvailabilityZone=us-east-1a --region=us-east-1 --count=1)
+instance_details=$(aws ec2 run-instances --image-id $image_id --instance-type t2.micro --key-name thomasjohansen.it --security-groups federation-demo --placement AvailabilityZone=us-east-1a --region=us-east-1 --count=1)
 
 # Get id of the started instance
 #instance_id=$(aws ec2 describe-instances --filters "Name=image-id,Values=$image_id" | jq ".Reservations[]|.Instances[]|.InstanceId" | sed 's/"//g')
