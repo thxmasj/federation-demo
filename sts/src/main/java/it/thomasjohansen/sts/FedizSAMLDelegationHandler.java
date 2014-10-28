@@ -21,7 +21,7 @@ package it.thomasjohansen.sts;
 import org.apache.cxf.sts.request.ReceivedToken;
 import org.apache.cxf.sts.token.delegation.TokenDelegationParameters;
 import org.apache.cxf.sts.token.delegation.TokenDelegationResponse;
-import org.apache.wss4j.common.saml.SamlAssertionWrapper;
+import org.apache.ws.security.saml.ext.AssertionWrapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +44,7 @@ public class FedizSAMLDelegationHandler
         return super.isDelegationAllowed(tokenParameters);
     }
     @Override
-    protected List<String> getAudienceRestrictions(SamlAssertionWrapper assertion) {
+    protected List<String> getAudienceRestrictions(AssertionWrapper assertion) {
         return Collections.emptyList();
     }
     

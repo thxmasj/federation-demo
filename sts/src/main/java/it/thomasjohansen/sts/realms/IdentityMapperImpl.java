@@ -21,7 +21,7 @@ package it.thomasjohansen.sts.realms;
 
 import org.apache.cxf.common.logging.LogUtils;
 import org.apache.cxf.sts.IdentityMapper;
-import org.apache.wss4j.common.principal.CustomTokenPrincipal;
+import org.apache.ws.security.CustomTokenPrincipal;
 
 import java.security.Principal;
 import java.util.logging.Logger;

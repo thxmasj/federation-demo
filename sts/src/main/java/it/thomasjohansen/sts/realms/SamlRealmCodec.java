@@ -20,8 +20,8 @@
 package it.thomasjohansen.sts.realms;
 
 import org.apache.cxf.sts.token.realm.SAMLRealmCodec;
-import org.apache.wss4j.common.saml.SAMLKeyInfo;
-import org.apache.wss4j.common.saml.SamlAssertionWrapper;
+import org.apache.ws.security.saml.SAMLKeyInfo;
+import org.apache.ws.security.saml.ext.AssertionWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +33,7 @@ public class SamlRealmCodec implements SAMLRealmCodec {
     private static final Logger LOG = LoggerFactory.getLogger(SamlRealmCodec.class);
 
     @Override
-    public String getRealmFromToken(SamlAssertionWrapper assertion) {
+    public String getRealmFromToken(AssertionWrapper assertion) {
         SAMLKeyInfo ki = assertion.getSignatureKeyInfo();
         X509Certificate[] certs = ki.getCerts();
         X500Principal subject = certs[0].getSubjectX500Principal();

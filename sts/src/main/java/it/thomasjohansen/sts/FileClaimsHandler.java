@@ -18,12 +18,7 @@
  */
 package it.thomasjohansen.sts;
 
-import org.apache.cxf.rt.security.claims.Claim;
-import org.apache.cxf.rt.security.claims.ClaimCollection;
-import org.apache.cxf.sts.claims.ClaimsHandler;
-import org.apache.cxf.sts.claims.ClaimsParameters;
-import org.apache.cxf.sts.claims.ProcessedClaim;
-import org.apache.cxf.sts.claims.ProcessedClaimCollection;
+import org.apache.cxf.sts.claims.*;
 
 import java.net.URI;
 import java.util.Collections;
@@ -60,28 +55,28 @@ public class FileClaimsHandler implements ClaimsHandler {
     
 
     @Override
-    public ProcessedClaimCollection retrieveClaimValues(ClaimCollection claims,
+    public ClaimCollection retrieveClaimValues(RequestClaimCollection claims,
             ClaimsParameters parameters) {
 
         if (getUserClaims() == null || parameters.getPrincipal() == null) {
-            return new ProcessedClaimCollection();
+            return new ClaimCollection();
         }
 
         if (claims == null || claims.size() == 0) {
-            return new ProcessedClaimCollection();
+            return new ClaimCollection();
         }
 
         Map<String, String> claimMap = getUserClaims().get(parameters.getPrincipal().getName());
         if (claimMap == null || claimMap.size() == 0) {
-            return new ProcessedClaimCollection();
+            return new ClaimCollection();
         }
 
         if (claims != null && claims.size() > 0) {
-            ProcessedClaimCollection claimCollection = new ProcessedClaimCollection();
-            for (Claim requestClaim : claims) { 
+            ClaimCollection claimCollection = new ClaimCollection();
+            for (RequestClaim requestClaim : claims) { 
                 String claimValue = claimMap.get(requestClaim.getClaimType().toString());
                 if (claimValue != null) {
-                    ProcessedClaim claim = new ProcessedClaim();
+                    Claim claim = new Claim();
                     claim.setClaimType(requestClaim.getClaimType());
                     claim.setIssuer("Test Issuer");
                     claim.setOriginalIssuer("Original Issuer");

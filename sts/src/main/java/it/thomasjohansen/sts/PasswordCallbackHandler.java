@@ -18,7 +18,7 @@
  */
 package it.thomasjohansen.sts;
 
-import org.apache.wss4j.common.ext.WSPasswordCallback;
+import org.apache.ws.security.WSPasswordCallback;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
@@ -30,7 +30,7 @@ public class PasswordCallbackHandler implements CallbackHandler {
     public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
         for (int i = 0; i < callbacks.length; i++) {
             if (callbacks[i] instanceof WSPasswordCallback) { // CXF
-                WSPasswordCallback pc = (org.apache.wss4j.common.ext.WSPasswordCallback) callbacks[i];
+                WSPasswordCallback pc = (WSPasswordCallback) callbacks[i];
                 if ("realma".equals(pc.getIdentifier())) {
                     pc.setPassword("realma");
                     break;
