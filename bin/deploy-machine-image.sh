@@ -1,10 +1,11 @@
 #!/bin/sh
 
-if [ ! $# -eq 1 ]; then echo "No AMI id specified"; exit 1; fi
+if [ ! $# -eq 2 ]; then echo "Syntax: $0 <AMI id> <Security group id>"; exit 1; fi
 
 image_id=$1
+sg_id=$2
 
-instance_details=$(aws ec2 run-instances --image-id $image_id --instance-type t2.micro --key-name thomasjohansen.it --security-groups IdP --placement AvailabilityZone=us-east-1a --region=us-east-1 --count=1)
+instance_details=$(aws ec2 run-instances --image-id $image_id --instance-type t2.micro --key-name thomasjohansen.it --security-groups $sg_id --placement AvailabilityZone=us-east-1a --region=us-east-1 --count=1)
 
 # Get id of the started instance
 #instance_id=$(aws ec2 describe-instances --filters "Name=image-id,Values=$image_id" | jq ".Reservations[]|.Instances[]|.InstanceId" | sed 's/"//g')

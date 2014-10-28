@@ -20,7 +20,7 @@
     },
     {
       "type": "file",
-      "source": "target/keys/ssl/idp-ssl.jks",
+      "source": "target/keys/ssl/sts-ssl.jks",
       "destination": "/tmp/keystore.jks"
     },
     {
