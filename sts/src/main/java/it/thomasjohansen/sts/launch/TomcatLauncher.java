@@ -30,7 +30,10 @@ public class TomcatLauncher {
         connector.setPort(8443);
         connector.setSecure(true);
         connector.setScheme("https");
-        connector.setAttribute("ciphers", "ALL:!aNULL:!ADH:!eNULL:!LOW:!EXP:RC4+RSA:+HIGH:+MEDIUM");
+        // The two cipher lists below are equivalents
+//        connector.setAttribute("ciphers", "ALL:!aNULL:!ADH:!eNULL:!LOW:!EXP:RC4+RSA:+HIGH:+MEDIUM");
+//        connector.setAttribute("ciphers", "TLS_RSA_WITH_RC4_128_MD5:TLS_RSA_WITH_RC4_128_SHA:TLS_RSA_WITH_AES_128_CBC_SHA:TLS_RSA_WITH_AES_128_CBC_SHA256:TLS_RSA_WITH_3DES_EDE_CBC_SHA:TLS_RSA_WITH_AES_256_CBC_SHA:TLS_RSA_WITH_AES_256_CBC_SHA256");
+        connector.setAttribute("ciphers", "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_RC4_128_SHA,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_RSA_WITH_AES_256_CBC_SHA,SSL_RSA_WITH_RC4_128_SHA");
         if (System.getProperty("javax.net.ssl.keyStore") == null)
             throw new IllegalArgumentException("System property \"javax.net.ssl.keyStore\" must specify the path to a JKS keystore");
         connector.setAttribute("keystoreFile", new File(System.getProperty("javax.net.ssl.keyStore")).getAbsolutePath());
