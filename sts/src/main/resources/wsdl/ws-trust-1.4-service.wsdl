@@ -9,7 +9,7 @@
         xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
         xmlns:wsp="http://www.w3.org/ns/ws-policy">
 
-  <wsdl:import namespace="http://docs.oasis-open.org/ws-sx/ws-trust/200512/" location="ws-trust-1.4.wsdl"/>
+  <wsdl:import namespace="http://docs.oasis-open.org/ws-sx/ws-trust/200512/" location="wsdl/ws-trust-1.4.wsdl"/>
 
   <wsdl:binding name="UT_Binding" type="wstrust:STS">
     <wsp:PolicyReference URI="#UT_policy" />
